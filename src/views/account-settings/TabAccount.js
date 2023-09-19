@@ -17,9 +17,12 @@ import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
 import Button from '@mui/material/Button'
+import themeConfig from 'src/configs/themeConfig'
+import LoginPage from 'src/pages/pages/login'
 
 // ** Icons Imports
 import Close from 'mdi-material-ui/Close'
+import { Login } from 'mdi-material-ui'
 
 const ImgStyled = styled('img')(({ theme }) => ({
   width: 120,
@@ -88,10 +91,10 @@ const TabAccount = () => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Username' placeholder='johnDoe' defaultValue='johnDoe' />
+            <TextField fullWidth label='Username' placeholder='johnDoe' defaultValue="test" />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Name' placeholder='John Doe' defaultValue='John Doe' />
+            <TextField fullWidth label='Name' placeholder='John Doe' defaultValue={themeConfig.accountName} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -99,20 +102,8 @@ const TabAccount = () => {
               type='email'
               label='Email'
               placeholder='johnDoe@example.com'
-              defaultValue='johnDoe@example.com'
+              defaultValue={themeConfig.accountEmail}
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Role</InputLabel>
-              <Select label='Role' defaultValue='admin'>
-                <MenuItem value='admin'>Admin</MenuItem>
-                <MenuItem value='author'>Author</MenuItem>
-                <MenuItem value='editor'>Editor</MenuItem>
-                <MenuItem value='maintainer'>Maintainer</MenuItem>
-                <MenuItem value='subscriber'>Subscriber</MenuItem>
-              </Select>
-            </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
@@ -123,6 +114,9 @@ const TabAccount = () => {
                 <MenuItem value='pending'>Pending</MenuItem>
               </Select>
             </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label='Address' placeholder='ER-36 & 37 Jawahar Market Camp-II Bhilai' defaultValue='ABC Pvt. Ltd.' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth label='Company' placeholder='ABC Pvt. Ltd.' defaultValue='ABC Pvt. Ltd.' />

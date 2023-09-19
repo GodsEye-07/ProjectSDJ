@@ -3,6 +3,7 @@ import { useState, Fragment } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 // ** MUI Components
 import Box from '@mui/material/Box'
@@ -20,6 +21,7 @@ import { styled, useTheme } from '@mui/material/styles'
 import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 // ** Icons Imports
 import Google from 'mdi-material-ui/Google'
@@ -61,12 +63,69 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 const RegisterPage = () => {
   // ** States
   const [values, setValues] = useState({
+    email: '',
     password: '',
+    confirmPassword: '',
+    privacyPolicy: false,
     showPassword: false
   })
 
+  const auth = getAuth();
+
+  //handle all the textfield errors before and then pass the 
+  // signInNewUser function to execute the signin action.
+
+  const signInNewuser = () => {
+    console.log(values.email, values.password);
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+    .then((userCredential) => {
+      // Signed in 
+      console.log(userCredential);
+      const user = userCredential.user;
+
+      //check for the admin status/ signedIn status here
+      if(user.email == "shreedurgajewellersbhilai@gmail.com"){
+        themeConfig.isLoggedIn = true;
+        themeConfig.isAdmin = true;
+        router.push('/');
+      }else{
+        themeConfig.isLoggedIn = true;
+        themeConfig.isAdmin = false;
+        router.push('/');
+      }
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+      themeConfig.isLoggedIn = false;
+    });
+  }
+
+  const handleTextFieldErrors = () => {
+    const mailformat = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,"gm");
+    if(values.email == null && values.email == ""){
+      window.alert('No Email address');
+    }else if(mailformat.test(values.email)==false){
+      window.alert('Invalid Email address entered, Please enter valid Email Address to proceed.');
+      setValues({...values, email: ""});
+    }else if(values.password.length < 7){
+      window.alert('Password Length should be greater than 6');
+      setValues({...values, password: ""});
+    }else if((values.password == values.confirmPassword) === false){
+      window.alert('Passwords do not match.');
+      setValues({...values, password: ""});
+      setValues({...values, confirmPassword: ""});
+    }else{
+      console.log('all clear');
+      //allow the user to log in.
+      signInNewuser();
+    }
+  }
+
   // ** Hook
   const theme = useTheme()
+  const router = useRouter()
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -74,6 +133,11 @@ const RegisterPage = () => {
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
+  }
+
+  const handlePrivacyPolicyCheck = () => {
+    setValues({ ...values, privacyPolicy: !values.privacyPolicy })
+    console.log(values.privacyPolicy);
   }
 
   const handleMouseDownPassword = event => {
@@ -161,11 +225,15 @@ const RegisterPage = () => {
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
               Adventure starts here 🚀
             </Typography>
-            <Typography variant='body2'>Make your app management easy and fun!</Typography>
+            <Typography variant='body2'>Manage your portfolio easily!</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='username' label='Username' sx={{ marginBottom: 4 }} />
-            <TextField fullWidth type='email' label='Email' sx={{ marginBottom: 4 }} />
+            <TextField fullWidth 
+            type='email' 
+            label='Email' 
+            value={values.email}
+            onChange={handleChange('email')}
+            sx={{ marginBottom: 4 }} />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-register-password'>Password</InputLabel>
               <OutlinedInput
@@ -174,6 +242,7 @@ const RegisterPage = () => {
                 id='auth-register-password'
                 onChange={handleChange('password')}
                 type={values.showPassword ? 'text' : 'password'}
+                sx={{ marginBottom: 4 }}
                 endAdornment={
                   <InputAdornment position='end'>
                     <IconButton
@@ -188,8 +257,16 @@ const RegisterPage = () => {
                 }
               />
             </FormControl>
+            <TextField autoFocus fullWidth 
+            id='confirmpassword' 
+            label='Confirm Password' 
+            value={values.confirmPassword}
+            onChange={handleChange('confirmPassword')}
+            sx={{ marginBottom: 4 }} />
             <FormControlLabel
               control={<Checkbox />}
+              value={values.privacyPolicy}
+              onChange={handlePrivacyPolicyCheck}
               label={
                 <Fragment>
                   <span>I agree to </span>
@@ -199,7 +276,11 @@ const RegisterPage = () => {
                 </Fragment>
               }
             />
-            <Button fullWidth size='large' type='submit' variant='contained' sx={{ marginBottom: 7 }}>
+            <Button fullWidth size='large' 
+            type='submit' 
+            variant='contained' 
+            onClick={()=> handleTextFieldErrors()}
+            sx={{ marginBottom: 7 }}>
               Sign up
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -217,18 +298,6 @@ const RegisterPage = () => {
               <Link href='/' passHref>
                 <IconButton component='a' onClick={e => e.preventDefault()}>
                   <Facebook sx={{ color: '#497ce2' }} />
-                </IconButton>
-              </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Twitter sx={{ color: '#1da1f2' }} />
-                </IconButton>
-              </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Github
-                    sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
-                  />
                 </IconButton>
               </Link>
               <Link href='/' passHref>

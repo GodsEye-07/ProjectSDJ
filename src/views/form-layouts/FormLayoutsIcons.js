@@ -16,7 +16,7 @@ import MessageOutline from 'mdi-material-ui/MessageOutline'
 const FormLayoutsIcons = () => {
   return (
     <Card>
-      <CardHeader title='Basic with Icons' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Reach out to us here!' titleTypographyProps={{ variant: 'h6' }} />
       <CardContent>
         <form onSubmit={e => e.preventDefault()}>
           <Grid container spacing={5}>
@@ -24,7 +24,7 @@ const FormLayoutsIcons = () => {
               <TextField
                 fullWidth
                 label='Full Name'
-                placeholder='Leonard Carter'
+                placeholder='Full Name'
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
@@ -39,7 +39,7 @@ const FormLayoutsIcons = () => {
                 fullWidth
                 type='email'
                 label='Email'
-                placeholder='carterleonard@gmail.com'
+                placeholder='shreedurgajewellersbhilai@gmail.com'
                 helperText='You can use letters, numbers & periods'
                 InputProps={{
                   startAdornment: (
@@ -55,7 +55,7 @@ const FormLayoutsIcons = () => {
                 fullWidth
                 type='number'
                 label='Phone No.'
-                placeholder='+1-123-456-8790'
+                placeholder='+91-12345-67890'
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
@@ -71,7 +71,7 @@ const FormLayoutsIcons = () => {
                 multiline
                 minRows={3}
                 label='Message'
-                placeholder='Bio...'
+                placeholder='Please type your message / query here.'
                 sx={{ '& .MuiOutlinedInput-root': { alignItems: 'baseline' } }}
                 InputProps={{
                   startAdornment: (

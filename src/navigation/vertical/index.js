@@ -1,76 +1,74 @@
 // ** Icon imports
-import Login from 'mdi-material-ui/Login'
-import Table from 'mdi-material-ui/Table'
-import CubeOutline from 'mdi-material-ui/CubeOutline'
-import HomeOutline from 'mdi-material-ui/HomeOutline'
-import FormatLetterCase from 'mdi-material-ui/FormatLetterCase'
-import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
-import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
-import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
-import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
+import themeConfig from 'src/configs/themeConfig'
+import { AccountSettings, HumanGreetingProximity, Finance, DiamondStone, AccountBoxOutline, Diamond, AccountAlert, AccountAlertOutline, DiamondOutline, FaceManProfile, AccountBox, AccountEdit  } from 'mdi-material-ui'
 
 const navigation = () => {
   return [
     {
-      title: 'Dashboard',
-      icon: HomeOutline,
+      sectionTitle: 'Shree Durga Jewellers'
+    },
+    {
+      title: 'Jewellery Collection',
+      icon: DiamondStone,
+      path: '/pages/Jewellery',
+    },
+    {
+      title: 'Live Rates',
+      icon: Finance,
+      path: '/tables',
+    },
+    {
+      title: 'About Us',
+      icon: AlertCircleOutline,
+      path: '/about-us'
+    },
+    {
+      title: 'Contact Us',
+      path: '/form-layouts',
+      icon: AccountBoxOutline
+    },
+    {
+      title: 'Careers',
+      icon: HumanGreetingProximity,
+      path: '/careers',
+      openInNewTab: true
+    },
+    {
+      sectionTitle: 'Personal Details'
+    },
+    {
+      title: 'Profile',
+      icon: AccountSettings,
       path: '/'
     },
     {
       title: 'Account Settings',
-      icon: AccountCogOutline,
+      icon: AccountEdit,
       path: '/account-settings'
     },
     {
-      sectionTitle: 'Pages'
+      sectionTitle: 'Admin Tools',
+      disabled: true
     },
     {
-      title: 'Login',
-      icon: Login,
-      path: '/pages/login',
-      openInNewTab: true
+      title: 'Live Rates',
+      icon: Finance,
+      path: '/admin/liverates',
+      disabled: themeConfig.isAdmin ? true : false
     },
     {
-      title: 'Register',
-      icon: AccountPlusOutline,
-      path: '/pages/register',
-      openInNewTab: true
+      title: 'Jewellery',
+      icon: DiamondStone,
+      path: '/admin/jewellery',
+      disabled: themeConfig.isAdmin ? true : false
     },
     {
-      title: 'Error',
-      icon: AlertCircleOutline,
-      path: '/pages/error',
-      openInNewTab: true
+      title: 'Other Updates',
+      icon: AccountAlertOutline,
+      path: '/admin/other-updates',
+      disabled: themeConfig.isAdmin ? true : false
     },
-    {
-      sectionTitle: 'User Interface'
-    },
-    {
-      title: 'Typography',
-      icon: FormatLetterCase,
-      path: '/typography'
-    },
-    {
-      title: 'Icons',
-      path: '/icons',
-      icon: GoogleCirclesExtended
-    },
-    {
-      title: 'Cards',
-      icon: CreditCardOutline,
-      path: '/cards'
-    },
-    {
-      title: 'Tables',
-      icon: Table,
-      path: '/tables'
-    },
-    {
-      icon: CubeOutline,
-      title: 'Form Layouts',
-      path: '/form-layouts'
-    }
   ]
 }
 

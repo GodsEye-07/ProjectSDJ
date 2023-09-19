@@ -58,24 +58,31 @@ const TabInfo = () => {
             </DatePickerWrapper>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth type='number' label='Phone' placeholder='(123) 456-7890' />
+            <TextField fullWidth type='number' label='Phone' placeholder='+91 12345-67890' defaultValue='+91 12345-67890' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label='Website'
-              placeholder='https://example.com/'
-              defaultValue='https://themeselection.com/'
+              label='Aadhar Card'
+              placeholder='XXXX-XXXX-XXXX'
+              defaultValue='XXXX-XXXX-XXXX'
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label='Pan Card'
+              placeholder='XXXXXXXXXX'
+              defaultValue='XXXXXXXXXX'
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
               <InputLabel>Country</InputLabel>
               <Select label='Country' defaultValue='USA'>
+              <MenuItem value='Australia'>India</MenuItem>
                 <MenuItem value='USA'>USA</MenuItem>
                 <MenuItem value='UK'>UK</MenuItem>
-                <MenuItem value='Australia'>Australia</MenuItem>
-                <MenuItem value='Germany'>Germany</MenuItem>
               </Select>
             </FormControl>
           </Grid>

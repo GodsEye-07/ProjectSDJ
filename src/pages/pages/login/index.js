@@ -4,6 +4,7 @@ import { useState } from 'react'
 // ** Next Imports
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 // ** MUI Components
 import Box from '@mui/material/Box'
@@ -24,8 +25,6 @@ import MuiFormControlLabel from '@mui/material/FormControlLabel'
 
 // ** Icons Imports
 import Google from 'mdi-material-ui/Google'
-import Github from 'mdi-material-ui/Github'
-import Twitter from 'mdi-material-ui/Twitter'
 import Facebook from 'mdi-material-ui/Facebook'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
@@ -38,6 +37,8 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
+import App from 'src/pages/_app';
+import { VideoMarker } from 'mdi-material-ui';
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -59,7 +60,10 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 
 const LoginPage = () => {
   // ** State
+  themeConfig.isAdmin = false;
+  themeConfig.isLoggedIn = false;
   const [values, setValues] = useState({
+    email: '',
     password: '',
     showPassword: false
   })
@@ -67,6 +71,7 @@ const LoginPage = () => {
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
+  const auth = getAuth();
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -78,6 +83,47 @@ const LoginPage = () => {
 
   const handleMouseDownPassword = event => {
     event.preventDefault()
+  }
+
+  const checkLoginDetails = () =>{
+    signInWithEmailAndPassword(auth, values.email, values.password)
+    .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+   })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if(values.email == null || values.email == ""){
+        console.log('No Email provided.');
+      }else if(values.password == null || values.password == ""){
+        console.log('No Password provided.');
+      }else{
+        console.log('Invalid credentials provided.');
+      }
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // Handle the logged in state here.
+        const uid = user.uid;
+        themeConfig.isLoggedIn = true;
+        if(user.email == "abc@gmail.com"){
+          themeConfig.isAdmin = true;
+          themeConfig.accountEmail = user.email
+          router.push('/tables');
+        }else{
+          themeConfig.isAdmin = false;
+          themeConfig.accountEmail = user.email
+          router.push('/tables');
+        }
+      } else {
+        // User is signed out / not signed in
+        themeConfig.isLoggedIn = false; 
+      }
+    });
   }
 
   return (
@@ -161,10 +207,15 @@ const LoginPage = () => {
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
               Welcome to {themeConfig.templateName}! 👋🏻
             </Typography>
-            <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
+            <Typography variant='body2'>Please fill the details to sign-in to your account.</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
+            <TextField autoFocus fullWidth 
+            id='email' 
+            label='Email' 
+            value={values.email}
+            onChange={handleChange('email')}
+            sx={{ marginBottom: 4 }} />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
@@ -200,7 +251,7 @@ const LoginPage = () => {
               size='large'
               variant='contained'
               sx={{ marginBottom: 7 }}
-              onClick={() => router.push('/')}
+              onClick={() =>checkLoginDetails()}
             >
               Login
             </Button>
@@ -219,18 +270,6 @@ const LoginPage = () => {
               <Link href='/' passHref>
                 <IconButton component='a' onClick={e => e.preventDefault()}>
                   <Facebook sx={{ color: '#497ce2' }} />
-                </IconButton>
-              </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Twitter sx={{ color: '#1da1f2' }} />
-                </IconButton>
-              </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Github
-                    sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
-                  />
                 </IconButton>
               </Link>
               <Link href='/' passHref>
