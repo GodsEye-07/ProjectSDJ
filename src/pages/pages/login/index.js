@@ -110,14 +110,15 @@ const LoginPage = () => {
         // Handle the logged in state here.
         const uid = user.uid;
         themeConfig.isLoggedIn = true;
-        if(user.email == "abc@gmail.com"){
+        if(user.email == "shreedurgajewellersbhilai@gmail.com"){
           themeConfig.isAdmin = true;
-          themeConfig.accountEmail = user.email
+          themeConfig.accountUserEmail = user.email
           router.push('/tables');
         }else{
           themeConfig.isAdmin = false;
-          themeConfig.accountEmail = user.email
-          router.push('/tables');
+          themeConfig.accountUserEmail = user.email
+          console.log(themeConfig.isAdmin, themeConfig.accountUserEmail);
+          router.push('/userProfile');
         }
       } else {
         // User is signed out / not signed in

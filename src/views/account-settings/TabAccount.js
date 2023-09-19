@@ -102,7 +102,7 @@ const TabAccount = () => {
               type='email'
               label='Email'
               placeholder='johnDoe@example.com'
-              defaultValue={themeConfig.accountEmail}
+              defaultValue={themeConfig.accountUserEmail}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

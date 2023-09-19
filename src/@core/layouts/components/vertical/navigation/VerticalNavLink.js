@@ -82,7 +82,7 @@ const VerticalNavLink = ({ item, navVisible, toggleNavVisibility }) => {
           }}
           sx={{
             pl: 5.5,
-            ...(item.disabled ? { pointerEvents: 'none' } : { cursor: 'pointer' })
+            ...(item.disabled ? { pointerEvents: 'none'} : { cursor: 'pointer' })
           }}
         >
           <ListItemIcon

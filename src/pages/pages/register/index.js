@@ -87,11 +87,15 @@ const RegisterPage = () => {
       if(user.email == "shreedurgajewellersbhilai@gmail.com"){
         themeConfig.isLoggedIn = true;
         themeConfig.isAdmin = true;
+        themeConfig.accountUserEmail = user.email;
         router.push('/');
       }else{
+        console.log(user);
         themeConfig.isLoggedIn = true;
         themeConfig.isAdmin = false;
-        router.push('/');
+        themeConfig.isUserNew = true;
+        themeConfig.accountUserEmail = user.email;
+        router.push('/account-settings');
       }
     })
     .catch((error) => {

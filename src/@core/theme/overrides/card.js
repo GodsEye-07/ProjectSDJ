@@ -23,10 +23,18 @@ const Card = theme => {
           }
         },
         title: {
+          display: 'flex',
+          justifyContent: 'center',
           lineHeight: 1,
           fontWeight: 500,
-          fontSize: '1.25rem',
-          letterSpacing: '0.0125em'
+          fontSize: '70px',
+        },
+        subtitle:{
+          display: 'flex',
+          justifyContent: 'center',
+          lineHeight: 1,
+          fontWeight: 300,
+          fontSize: '40px',
         },
         action: {
           marginTop: 0,

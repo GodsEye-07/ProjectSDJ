@@ -11,10 +11,28 @@ const themeConfig = {
   // ** Other Configs
   responsiveFontSizes: true /* true | false */,
   disableRipple: false, /* true | false */
-  accountName: 'Test User',
+  
   isAdmin: false,   
   isLoggedIn: false,
-  accountEmail: '',
+
+  //to be turned to false with checks
+  accountDataFilled: true,
+
+
+  //Account detail stored globally
+  accountUserEmail: '',
+  isUserNew: false,
+  accountUsername: '',
+  accountUserName: 'Test User',
+  accountUserAddress: '',
+  accountUserCompany: '',
+  accountUserBio: '',
+  accountUserAadharCardNumber: 0,
+  accountUserPanCardNumber: 0,
+  accountUserCountry: '',
+  accountUserPhoneNumber: 0,
+  accountUserLanguage: '',
+  accountUserGender: '',
 }
 
 export default themeConfig

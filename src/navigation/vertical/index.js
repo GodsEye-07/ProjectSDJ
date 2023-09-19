@@ -6,26 +6,28 @@ import { AccountSettings, HumanGreetingProximity, Finance, DiamondStone, Account
 const navigation = () => {
   return [
     {
-      sectionTitle: 'Shree Durga Jewellers'
+      sectionTitle: 'Shree Durga Jewellers',
+      disabled: !themeConfig.accountDataFilled
     },
     {
       title: 'Jewellery Collection',
       icon: DiamondStone,
       path: '/pages/Jewellery',
+      disabled: !themeConfig.accountDataFilled
     },
     {
       title: 'Live Rates',
       icon: Finance,
-      path: '/tables',
+      path: '/live-rates',
     },
     {
       title: 'About Us',
       icon: AlertCircleOutline,
-      path: '/about-us'
+      path: '/about-us',
     },
     {
       title: 'Contact Us',
-      path: '/form-layouts',
+      path: '/contact-us',
       icon: AccountBoxOutline
     },
     {
@@ -40,7 +42,7 @@ const navigation = () => {
     {
       title: 'Profile',
       icon: AccountSettings,
-      path: '/'
+      path: '/userProfile'
     },
     {
       title: 'Account Settings',
@@ -49,25 +51,25 @@ const navigation = () => {
     },
     {
       sectionTitle: 'Admin Tools',
-      disabled: true
+      disabled: !themeConfig.isAdmin
     },
     {
       title: 'Live Rates',
       icon: Finance,
       path: '/admin/liverates',
-      disabled: themeConfig.isAdmin ? true : false
+      disabled: !themeConfig.isAdmin 
     },
     {
       title: 'Jewellery',
       icon: DiamondStone,
       path: '/admin/jewellery',
-      disabled: themeConfig.isAdmin ? true : false
+      disabled: !themeConfig.isAdmin
     },
     {
       title: 'Other Updates',
       icon: AccountAlertOutline,
       path: '/admin/other-updates',
-      disabled: themeConfig.isAdmin ? true : false
+      disabled: !themeConfig.isAdmin
     },
   ]
 }
