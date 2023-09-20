@@ -113,12 +113,11 @@ const LoginPage = () => {
         if(user.email == "shreedurgajewellersbhilai@gmail.com"){
           themeConfig.isAdmin = true;
           themeConfig.accountUserEmail = user.email
-          router.push('/tables');
+          router.push('/live-rates');
         }else{
           themeConfig.isAdmin = false;
           themeConfig.accountUserEmail = user.email
-          console.log(themeConfig.isAdmin, themeConfig.accountUserEmail);
-          router.push('/userProfile');
+          router.push('/account-/settings');
         }
       } else {
         // User is signed out / not signed in

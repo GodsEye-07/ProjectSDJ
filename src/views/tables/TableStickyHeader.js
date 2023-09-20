@@ -12,22 +12,18 @@ import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 
 const columns = [
-  { id: 'metal', label: 'Metal Type', minWidth: 170 },
-  // { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'metal',
+    label: 'Metal Type',
+    minWidth: 170,
+    align: 'left' 
+  },
   {
     id: 'purity',
     label: 'Purity',
     minWidth: 170,
-    align: 'right',
+    align: 'center',
     format: value => value.toLocaleString('en-US')
   },
-  // {
-  //   id: 'size',
-  //   label: 'Size\u00a0(km\u00b2)',
-  //   minWidth: 170,
-  //   align: 'right',
-  //   format: value => value.toLocaleString('en-US')
-  // },
   {
     id: 'rate',
     label: 'Rate',
@@ -48,8 +44,6 @@ const rows = [
   createData('Gold', '75%', 37602103),
   createData('Silver', 'Fine', 83019200),
   createData('Silver', 'Jevar', 4857000),
-  createData('Silver', '75%', 126577691),
-  createData('Silver', '62%', 126317000),
 ]
 
 const TableStickyHeader = () => {

@@ -41,7 +41,10 @@ const AboutUs = () => {
       <CardContent>
         <Typography variant='body2' sx={{ marginBottom: 3.25 }}>
           <h1>About the Shop:</h1>
-          <h3>Established in 1968, Shree Durga Jewellers, was started in Power House Camp-II, Bhilai by Mr. Mahavir Prasad Verma.
+          <h3>
+              Shee Durga Jewellers is one of the leading business in Gold, Silver and Diamond Jewellery.
+              <b/>
+              Established in the year 1968, Shree Durga Jewellers, was started in Power House Camp-II, Bhilai by Mr. Mahavir Prasad Verma.
               With over 55+ years in the business the organisation has established a strong foothold in the Industry.
               Our Moto of believing in customer satisfaction while maintaining the highest quality of the product comes to the utmost importance to them.
           </h3>
@@ -49,9 +52,7 @@ const AboutUs = () => {
         <Typography variant='body2' sx={{ marginBottom: 3.25 }}>
           <h1>Product and Services offered:</h1>
           <h3>
-            Shree Durga Jewellers is one of the leading business in Gold, Silver and Diamond Jewellery.
-            <br/>
-            We are also known for our precious stone collection, fashionable and latest and the most trending jewellery designs, fancy jewellery, Immitation jewellery, Kundan Jewellery, Silver Utensils, etc.
+            We are known for our precious stone collection, fashionable and latest and the most trending jewellery designs, fancy jewellery, Immitation jewellery, Kundan Jewellery, Silver Utensils, etc.
             <br/>
             We are also the leader in South Indian jewellery based in Chhattisgarh region and apart from the ready made jewellery, we also provides the service of custom making jewellery in either Gold or Silver with high precision and maintaining the highest quality.
             <br/>
